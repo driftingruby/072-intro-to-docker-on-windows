@@ -1,0 +1,9 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  reconnect: false
+  database: template_development
+  pool: 50
+  username: template_user
+  password: password
+  host: localhost
