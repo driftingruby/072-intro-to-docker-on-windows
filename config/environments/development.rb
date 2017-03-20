@@ -24,7 +24,7 @@ Rails.application.configure do
     config.action_controller.perform_caching = false
 
     config.cache_store = :redis_store, {
-      host: 'localhost',
+      host: 'redis',
       port: 6379,
       db: 0,
       namespace: '072redis'

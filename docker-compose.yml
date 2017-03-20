@@ -2,8 +2,6 @@ version: '2'
 
 services:
   web:
-    environment:
-      ENVIRONMENT: DEVEL
     build: .
     command: bash -c "bundle && bundle exec rake db:create db:migrate db:seed && bundle exec rails s -b 0.0.0.0"
     volumes:
@@ -13,16 +11,13 @@ services:
     depends_on:
       - redis
       - mysql
-
   redis:
     image: redis
     ports:
       - 6379:6379
-
   mysql:
     image: mysql:5.7
     command: mysqld --character-set-server=utf8
-    # command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
     ports:
       - 3306:3306
     restart: always
@@ -33,7 +28,6 @@ services:
       MYSQL_DATABASE: template_development
       MYSQL_USER: dbuser
       MYSQL_PASSWORD: password
-
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
@@ -45,15 +39,3 @@ services:
       PMA_PORT: 3306
       PMA_USER: dbuser
       PMA_PASSWORD: password
-
-  sidekiq:
-    environment:
-      ENVIRONMENT: DEVEL
-    build: .
-    command: bundle exec sidekiq -C config/sidekiq.yml
-    volumes:
-      - .:/railsapp
-    depends_on:
-      - redis
-      - mysql
-      - web

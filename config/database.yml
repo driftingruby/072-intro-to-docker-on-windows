@@ -4,6 +4,6 @@ development:
   reconnect: false
   database: template_development
   pool: 50
-  username: template_user
+  username: dbuser
   password: password
-  host: localhost
+  host: mysql
